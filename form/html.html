@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styleindex.css">
+
+</head>
+<body>
+    
+    <div class="main">
+
+        <form action="" method="post" class="form" id="form-id">
+
+            <header class="header">
+                <h4>Meo: dang ki nhanh hon voi google hoac facebook</h4>
+            </header>
+            <div class="body">
+
+                <div class="form-group">
+                    <label for="full-name" class="form-lable">Ten day du</label>
+                    <input id="full-name" name="fullname" type="text" class="full-name-class" placeholder="VD: Son Ha">
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-lable">Email</label>
+                    <input type="email" name="email-class" id="email" placeholder="VD: hoangsonha492@gmail.com">
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-lable" for="password">Mat khau</label>
+                    <input id="password" name="password-class" type="password" placeholder="Nhap mat khau">
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="repeat-password" class="form-lable">Nhap lai mat khau</label>
+                    <input id="repeat-password" name="repeat-password-class" type="password" placeholder="Nhap lai mat khau">
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-lable">Gioi Tinh</label>
+                    <div>
+                        <input name="gender" type="radio" value="male" checked class="form-control">
+                        Nam
+                    </div>
+                    <div>
+                        <input name="gender" type="radio" value="female" class="form-control">
+                        Nu
+                    </div>
+                    <div>
+                        <input name="gender" type="radio" value="other" class="form-control">
+                        Nu
+                    </div>
+                    <span class="form-message"></span>
+                </div>
+
+
+            </div>
+            <footer class="footer">
+                <button type="submit">Dang ki</button>
+            </footer>
+
+
+        </form>
+
+    </div>
+
+    <script src="javascript/valid.js"></script>
+    
+    <script>
+        Validator({
+            form: '#form-id',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#full-name'),
+                Validator.isRequired('#email'),
+                Validator.isEmail('#email'),
+                Validator.minLength('#password', 6),
+                Validator.isRequired('#repeat-password'),
+                // Validator.isRequired('input[name="gender"]'),
+                Validator.isConfirm('#repeat-password', function() {    // return ra gt ma minh muon user nhap vao
+                    return document.querySelector('#form-id #password').value;
+                }, 'Mat khau nhap lai k chinh xac')
+            ],
+            onSubmit: function(data) {
+                console.log(data);
+            }
+        });
+    </script>
+
+</body>
+</html>

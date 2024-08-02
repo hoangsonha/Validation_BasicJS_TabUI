@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+
+    <script type="text/babel">
+        const cources = [
+            {
+                name: 'Ha',
+                age: 21
+            },
+            {
+                name: 'Quynh',
+                age: 21
+            },
+            {
+                name: 'Phuong',
+                age: 20
+            },
+            {
+                name: 'Ngan',
+                age: 19
+            }
+        ]
+
+       
+        function Test({
+            name,
+            age,
+            onClick
+        }) {
+            return (
+                <div>
+                    <h1 onClick={() => onClick(name)}>
+                        {name}
+                    </h1>
+                    <h1>{age}</h1>
+                </div>
+            )
+        }
+
+        function App() {
+
+            const handleClick = (name) => {
+                console.log('Hello ' + name)
+            }
+
+            return (
+                <div className="heading">
+                    {
+                        cources.map((cource, index) => {
+                            return <Test key='index' name={cource.name} age={cource.age} onClick={handleClick}/>
+                        })
+                        
+                    }
+                </div>
+                
+            )
+        }
+
+
+    // ReactDOM.render(<App />, document.getElementById('root'))
+
+    const root = document.getElementById('root')
+
+    const container = ReactDOM.createRoot(root)
+
+    container.render(<App />)
+
+        
+    </script>
+</body>
+</html>

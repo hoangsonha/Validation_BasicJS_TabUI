@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    
+    <div id="root"></div>
+
+    <div id="root1"></div>
+
+    <div id="root3"></div>
+
+    <script>
+
+        var dom = document.createElement('h1');
+        dom.setAttribute('title', 'Hello');
+        dom.setAttribute('class', 'heading');
+        dom.innerText = 'Hello guys'
+
+        document.body.appendChild(dom);
+
+
+        // React.createElement(type, props, children, children...N)
+
+        var react = React.createElement('h1', {
+            title: 'Hello',
+            className: 'heading'
+        }, 'Hello guys')
+
+        // đối số thứ 1 là type ( nhận đc nhiều loại thẻ khác nữa),
+        // dối số thứ 2 là props truyền nhiều attribute dạng object
+        // đối số thứ 3 là children (tức chỉ cái con bên trong thay vì innerText)
+        
+        // ----> đây là thành phần nhỏ nhât làm việc với react (react-element), k thể render ra vì k có thư viện react-DOM
+
+
+    </script>
+
+
+<script>
+
+    var ulDOM = document.createElement('ul');
+    var li1DOM = document.createElement('li');
+    li1DOM.innerText = 'Javascript'
+    var li2DOM = document.createElement('li');
+    li2DOM.innerText = 'ReactJS'
+
+    ulDOM.appendChild(li1DOM);
+    ulDOM.appendChild(li2DOM);
+
+    document.body.appendChild(ulDOM);
+
+
+    // react
+
+    var react = React.createElement(
+        'ul', 
+        null,
+        React.createElement('li', null, 'Javascript'),
+        React.createElement('li', null, 'ReactJS')    
+    )
+
+    console.log(react);
+
+
+    var bt = React.createElement(
+        'div',
+        {
+            className: 'post-item'
+        },
+        React.createElement('h2', {title: 'Hoc'}, 'Hoc ReactJS'),
+        React.createElement('p', null, 'Hoc ReactJS tu co ban den nag cao')
+
+    )
+
+    console.log(bt);
+
+    const container = document.getElementById('root')
+
+    // react DOM render UI  react 17
+
+    // ReactDOM.render(bt, root)
+
+    const root = ReactDOM.createRoot(container)
+    root.render(bt)    
+
+
+
+</script>
+
+<script type="text/babel">
+
+    const cources = [
+        {
+            name: 'HTML, CSS'
+        }, 
+        {
+            name: 'Responsive'
+        },
+        {
+            name: 'ReactJS'
+        }
+    ]
+
+    const test = (
+        <React.Fragment>
+            <ul>
+            {
+                cources.map((cource, index) => {
+
+                   return <li key={index}>{cource.name}</li>
+                })          
+            }
+            <h1>Hello h1</h1>
+            <h2>Hello h2</h2>
+        </ul>
+        <h2>Hello h2</h2>
+        </React.Fragment>
+    )
+
+    const container1 = document.getElementById('root1')
+
+    const root1 = ReactDOM.createRoot(container1)
+
+    root1.render(test)
+
+    
+
+</script>
+
+<script type="text/babel">
+
+    const homework = [
+        {
+            name: 'Ha',
+            age: 21,
+            phone: '123'
+        },
+        {
+            name: 'Quynh',
+            age: 21,
+            phone: '456'
+        },
+        {
+            name: 'Phuong',
+            age: 20,
+            phone: '789'
+        },
+        {
+            name: 'Ngan',
+            age: 19,
+            phone: '012'
+        },
+    ]
+
+
+    function Home(
+        {
+            name,
+            onClick,
+            booleanTrue,
+            booleanFalse
+        }
+    ) {
+        console.log(name)
+        return (
+            <div>
+                <button onClick={onClick(name)}>{name}</button>
+            </div>
+        )
+    }
+
+        function Tes() {
+
+        const handleClick = (name) => {
+            alert('name : ' + name)
+        }
+        return (
+            <div className="tes">
+                {
+                    
+                        homework.map((homeworks, index) => {
+                            return <Home 
+                            key={index} 
+                            name={homeworks.name}
+                            onClick={() => handleClick}
+                            booleanTrue
+                            booleanFalse={false} 
+                            />
+                        })  
+                    
+                    
+                }
+            </div>
+            )
+        }
+
+        function ha(option) {
+            return alert('test : ' + option)
+        }
+
+        ha('hihi')
+
+
+        const container2 = document.getElementById('root3')
+
+        const root2 = ReactDOM.createRoot(container2)
+
+        root2.render(<Tes />) 
+
+</script>
+
+</body>
+</html>
